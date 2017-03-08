@@ -1,0 +1,35 @@
+time setup
+  Time must be correct in order to esablish a connection
+    If not in the ballpark, SSH certification will fail
+  sudo date -s "Month_Name Numerical_Day Hour:Minutes:Seconds"
+    Ex: "Feb 5 10:33:14"
+
+if no pre-existing connection, must get on a visitor network
+  For OSU, connect to Visitor Network
+  Open Browswer and wait for ToS prompt or connection will not establish
+
+run updates
+  sudo apt-get update
+  sudo apt-get upgrade
+
+install the package
+  sudo apt-get install wpasupplicant
+  
+create configuration file
+  sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+  
+  use the settings from the included .conf file
+  
+edit network interfaces
+  sudo nano /etc/network/interfaces
+  
+  under wireless interface (ex: wlan0)
+    wpa-driver wext
+    *if not already present, add
+      wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+      
+reboot or restart networking
+  reboot
+    sudo reboot now
+  restart networking (didn't work for me and ended up rebooting)
+    sudo /etc/init.d/networking restart
